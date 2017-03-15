@@ -8,7 +8,6 @@ import (
    "bytes"
    "os/exec"
    "github.com/op/go-logging"
-   "fmt"
 )
 
 var log = logging.MustGetLogger("go-hello-bench")
