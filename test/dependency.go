@@ -12,6 +12,7 @@ Dependency is a type that represents a program that must be installed on a syste
 type Dependency struct {
    Name string
    checkCommand   string
+   checkCommandArgs   []string
    isInstalledStr string
    installCommand string
 }
@@ -21,7 +22,7 @@ Check returns true if a dependency is satisfied, or false if not.
  */
 func (d *Dependency) Check() bool {
    log.Infof("Checking dependency %s", d.Name)
-   err, outputStr, _ := common.RunCmd(d.checkCommand)
+   err, outputStr, _ := common.RunCmd(d.checkCommand, d.checkCommandArgs)
    common.CheckFatal(err)
    if outputStr != d.isInstalledStr {
       return true

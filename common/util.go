@@ -8,6 +8,7 @@ import (
    "bytes"
    "os/exec"
    "github.com/op/go-logging"
+   "fmt"
 )
 
 var log = logging.MustGetLogger("go-hello-bench")
@@ -34,10 +35,19 @@ func CheckLog(e error){
 RunCmd runs a command using exec, and returns what was printed to Stdout and Stderr as strings. If an error was
 encountered, it is returned as well.
  */
-func RunCmd(cmd string)(err error, outputStr, errorStr string){
+func RunCmd(cmd string, args []string)(err error, outputStr, errorStr string){
    var outputBuf bytes.Buffer
    var errorBuf bytes.Buffer
-   cmdVar := exec.Command(cmd)
+   argsStr := ""
+   for i := range args{
+      argsStr += args[i]
+      if i != len(args) - 1{
+         argsStr += " "
+      }
+   }
+   fullCmd := cmd + " " + argsStr
+   log.Infof("About to exec: [%s]", fullCmd)
+   cmdVar := exec.Command(fullCmd)
    cmdVar.Stdout = &outputBuf
    cmdVar.Stderr = &errorBuf
    errVar := cmdVar.Run()

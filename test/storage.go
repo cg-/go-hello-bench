@@ -9,7 +9,8 @@ var Filebench = Test{
    Deps: []Dependency{
       Dependency{
          Name:           "build-essential",
-         checkCommand:   "dpkg-query -W -f='${Status}' build-essential",
+         checkCommand:   "dpkg-query",
+         checkCommandArgs:   []string{"-W", "-f='${Status}'", "build-essential"},
          isInstalledStr: "install ok installed",
          installCommand: "apt install build-essential",
       },
