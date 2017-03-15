@@ -46,7 +46,7 @@ func RunCmd(cmd string, args []string)(err error, outputStr, errorStr string){
    }
    fullCmd := cmd + " " + argsStr
    log.Infof("About to exec: [%s]", fullCmd)
-   cmdVar := exec.Command(fullCmd)
+   cmdVar := exec.Command(cmd, argsStr)
    cmdVar.Stdout = &outputBuf
    cmdVar.Stderr = &errorBuf
    errVar := cmdVar.Run()
