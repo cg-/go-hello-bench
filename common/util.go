@@ -7,14 +7,17 @@ package common
 import (
    "bytes"
    "os/exec"
+   "github.com/op/go-logging"
 )
+
+var log = logging.MustGetLogger("go-hello-bench")
 
 /*
 CheckFatal checks an error and crashes the program if it exists with a message to the log.
  */
 func CheckFatal(e error){
    if e != nil{
-      Logger.Fatal(e.Error())
+      log.Fatal(e.Error())
    }
 }
 
@@ -23,7 +26,7 @@ CheckFatal checks an error and notes a message to the log if it exists.
  */
 func CheckLog(e error){
    if e != nil{
-      Logger.Println(e.Error())
+      log.Error(e.Error())
    }
 }
 

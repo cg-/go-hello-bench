@@ -1,6 +1,5 @@
 package test
 
-import "github.com/cg-/go-hello-bench/common"
 
 /* Test represents a testing program that can be run.
  */
@@ -13,7 +12,7 @@ type Test struct {
  * they are installed or not.
  */
 func (t *Test) CheckDeps() map[string]bool {
-   common.Logger.Printf("Checking dependencies for %s", t.Name)
+   log.Infof("Checking dependencies for %s", t.Name)
    toRet := make(map[string]bool)
    for i := range t.Deps{
       val := t.Deps[i].Check()
@@ -26,7 +25,7 @@ func (t *Test) CheckDeps() map[string]bool {
  * and install them if they are not installed.
  */
 func (t *Test) InstallDepsLocal() {
-   common.Logger.Printf("Installing dependencies for %s", t.Name)
+   log.Infof("Installing dependencies for %s", t.Name)
    for i := range t.Deps{
       val := t.Deps[i].Check()
       if val == false{
