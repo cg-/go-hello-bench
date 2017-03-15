@@ -35,8 +35,8 @@ func RunCmd(cmd string)(err error, outputStr, errorStr string){
    var outputBuf bytes.Buffer
    var errorBuf bytes.Buffer
    cmdVar := exec.Command(cmd)
-   cmdVar.Stdout = outputBuf
-   cmdVar.Stderr = errorBuf
+   cmdVar.Stdout = &outputBuf
+   cmdVar.Stderr = &errorBuf
    errVar := cmdVar.Run()
    return errVar, outputBuf.String(), errorBuf.String()
 }
