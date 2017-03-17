@@ -28,6 +28,11 @@ func main() {
 	   }
 	*/
 
-	m := test.Filebench.CheckDeps()
+	m := test.TestTest.CheckDeps()
+	fmt.Println(m)
+
+	test.TestTest.InstallDepsLocal()
+
+	m = test.TestTest.CheckDeps()
 	fmt.Println(m)
 }
