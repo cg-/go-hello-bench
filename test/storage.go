@@ -4,6 +4,9 @@ Contains various storage benchmarks
 
 package test
 
+/*
+TestTest is a test
+*/
 var TestTest = Test{
 	Name:   "Test Test",
 	Prereq: nil,
@@ -12,6 +15,9 @@ var TestTest = Test{
 	},
 }
 
+/*
+Common sets up common files for all tests.
+*/
 var Common = Test{
 	Name:   "Common Test Files",
 	Prereq: nil,
@@ -28,17 +34,13 @@ var Common = Test{
 	},
 }
 
+/*
+Filebench is the filebench benchmarking software.
+*/
 var Filebench = Test{
 	Name:   "Filebench",
 	Prereq: &Common,
 	Deps: []Dependency{
-		Dependency{
-			Name:               "build-essential",
-			checkCommand:       "dpkg-query",
-			checkCommandArgs:   []string{"-W", "-f=${Status}", "build-essential"},
-			isInstalledStr:     "install ok installed",
-			installCommand:     "apt",
-			installCommandArgs: []string{"install", "build-essential"},
-		},
+		NewAptDependency("build-essential"),
 	},
 }

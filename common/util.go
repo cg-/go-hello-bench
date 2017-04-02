@@ -6,11 +6,37 @@ package common
 
 import (
 	"bytes"
-	"github.com/op/go-logging"
+	"os"
 	"os/exec"
+
+	"github.com/op/go-logging"
 )
 
 var log = logging.MustGetLogger("go-hello-bench")
+
+/*
+CheckIfSuperuser returns true if the user is running as Superuser, otherwise
+it will return false.
+*/
+func CheckIfSuperuser() bool {
+	if os.Getegid() != 0 {
+		return false
+	}
+	return true
+}
+
+/*
+IsInStringSlice will return true if a string matches a string inside a slice,
+otherwise it will return false.
+*/
+func IsInStringSlice(s string, slice []string) bool {
+	for i := range slice {
+		if slice[i] == s {
+			return true
+		}
+	}
+	return false
+}
 
 /*
 CheckFatal checks an error and crashes the program if it exists with a message to the log.
